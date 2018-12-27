@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Utube Groupies - Theater Room</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" 
+        integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" 
+        crossorigin="anonymous">
+</head>
+
+<body class="p-3 bg-dark">
+    <header class="mb-4">
+        <nav class="navbar text-light bg-dark py-3">
+            <div class="col">
+                <a href="/utubegroupies/dashboard" style="text-decoration:none" class="text-light">
+                    <h4>Groupies Dashboard</h4>
+                </a>
+            </div>
+            <div class="col-md-2">
+                <a href="/utubegroupies/logout">
+                    <button type="button" class="btn btn-outline-danger">Logout</button>
+                </a>
+            </div>
+        </nav>
+    </header>
+    
+    <div class="row d-flex justify-content-center mt-5">
+        <div class="col">
+            <div id="player-img"><img src="{{ img_url }}" alt="video-img"></div>
+            <div style="display:none" id="player"></div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+    
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" 
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" 
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" 
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" 
+        integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" 
+        crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        var tag = document.createElement('script');
+        tag.id = 'iframe-demo';
+        tag.src = 'https://www.youtube.com/iframe_api';
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player;
+        var player_status = -1;
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                width: 1280,
+                height: 720,
+                videoId: '{{ video_id }}',
+                playerVars: {
+                    'enablejsapi': 1,
+                    'autoplay' : 0,
+                    'controls' : 0,
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        };
+
+        function onPlayerReady(event) {
+            document.getElementById('player').style.borderColor = '#FF6D00';
+        };
+
+        function onPlayerStateChange(event) {
+            console.log(event.data);
+            player_status = event.data;
+        };
+
+        document.onkeydown = function(keyPressed) {
+            if (keyPressed.code == "Space") {
+                if (player_status == 1) {
+                    document.getElementById('player').style.display = "none";
+                    document.getElementById('player-img').style.display = "block";
+                    player.pauseVideo();
+                } else {
+                    document.getElementById('player').style.display = "block";
+                    document.getElementById('player-img').style.display = "none";
+                    player.playVideo();
+                }
+            }
+        };
+
+    </script>
+    
+</body>
+
+</html>

@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Login_Reg - Home</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" 
+        integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" 
+        crossorigin="anonymous">
+</head>
+
+<body class="bg-light">
+    <div class="jumbotron text-center">
+        <h2 class="display-4">Utube Groupies</h2>
+        <hr class="my-2">
+        <h6>Registration</h6>
+    </div>
+
+    <div class="container mt-4">
+
+        <form action="processRegister/" method="POST" id="register">
+            {% csrf_token %}
+        </form>
+        <form action="processLogin/" method="POST" id="login">
+            {% csrf_token %}
+        </form>
+    
+        <div class="row mb-3">
+            <div class="col-md-2"></div>
+            <div class="col">
+                <label for="fName">First Name</label>
+                <input type="text" class="form-control" name="fName" id="fName" placeholder="First name"
+                    form="register">
+                <div id="fName-error">
+                    {% if messages %}
+                        {% for message in messages %}
+                            {% if message.extra_tags == 'fName' %}
+                                <small class="text-danger">{{ message }}</small>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col">
+                <label for="lName">Last Name</label>
+                <input type="text" class="form-control" name="lName" id="lName" placeholder="Last name"
+                    form="register">
+                <div id="lName-error">
+                    {% if messages %}
+                        {% for message in messages %}
+                            {% if message.extra_tags == 'lName' %}
+                                <small class="text-danger">{{ message }}</small>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+        
+        <div class="row mb-3">
+            <div class="col-md-2"></div>
+            <div class="col">
+                <label for="email">Email Address</label>
+                <input type="text" class="form-control" name="email" id="email" placeholder="Email address"
+                form="register">
+                <div id="email-error">
+                    {% if messages %}
+                        {% for message in messages %}
+                            {% if message.extra_tags == 'email' %}
+                                <small class="text-danger">{{ message }}</small>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+        
+        <div class="row mb-3">
+            <div class="col-md-2"></div>
+            <div class="col">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" name="password" id="password" 
+                    placeholder="Password" form="register">
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.extra_tags == 'password' %}
+                            <small class="text-danger">{{ message }}</small>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    <small class="form-text text-muted">Your password must be between 8-20 characters long, 
+                        containing at least one number</small>
+                {% endif %}
+            </div>
+            <div class="col">
+                <label for="pw_confirm">Password (Confirm)</label>
+                <input type="password" class="form-control" name="pw_confirm" id="pw_confirm" 
+                    placeholder="Password confirm" form="register">
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.extra_tags == 'pwConfirm' %}
+                            <small class="text-danger">{{ message }}</small>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+        
+        <div class="row mb-3">
+            <div class="col-md-2"></div>
+            <div class="col form-group d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary mr-4" form="register">Register</button>
+                <button type="button" class="btn btn-success" data-toggle="collapse"
+                    data-target=".login-fields">Have an account?</button>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+            
+        <div class="row collapse mb-3 login-fields">
+            <div class="col"></div>
+            <div class="col">
+                <label for="emailL" class="d-flex justify-content-end">Email Address</label>
+                <input type="email" class="form-control text-right" name="emailL" id="emailL"
+                    placeholder="Email address" form="login">
+                <div class="text-right" id="emailL-error">
+                    {% if messages %}
+                        {% for message in messages %}
+                            {% if message.extra_tags == 'emailL' %}
+                                <small class="text-danger">{{ message }}</small>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+
+        <div class="row collapse mb-3 login-fields">
+            <div class="col"></div>
+            <div class="col">
+                <label for="passwordL" class="d-flex justify-content-end">Password</label>
+                <input type="password" class="form-control text-right" name="passwordL" id="passwordL"
+                    placeholder="Password" form="login">
+                <div class="text-right" id="passwordL-error">
+                    {% if messages %}
+                        {% for message in messages %}
+                            {% if message.extra_tags == 'passwordL' %}
+                                <small class="text-danger">{{ message }}</small>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+        
+        <div class="row collapse login-fields">
+            <div class="col-md-2"></div>
+            <div class="col form-group d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary" form="login">Login</button>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" 
+        crossorigin="anonymous"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" 
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" 
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" 
+        integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" 
+        crossorigin="anonymous"></script>
+    <script>
+        $('#email').change(function() {
+            var email = $(this).val();
+            console.log(email)
+
+            if (email.length > 0) {
+                $.ajax({
+                    type: 'POST',
+                    url: '/utubegroupies/signup/processRegister/email/',
+                    data: {
+                        csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value,
+                        'email' :   email,
+                    },
+                    dataType: 'json',
+                    success: function(data) {
+                        console.log(data);
+                        if (!data.is_valid || data.is_taken) {
+                            console.log("Something wrong")
+                            $('#email-error').html("<small class=text-danger>"+ data.error_message 
+                                +"</span>");
+                        } else {
+                            console.log("Email address available");
+                            $('#email-error').html("<small class='text-success'>Email address available"+
+                                "</small>");
+                        }
+                    }
+                });
+            } else {
+                $('#email-error').html("");
+            }
+        });
+        $('#login').submit(function(event) {
+            // event.preventDefault();
+            data = $(this).serializeArray();
+            console.log(data)
+        });
+        // $('#emailL').change(function() {
+        //     var email = $(this).val();
+            
+        //     if (email.length > 0) {
+        //         $.ajax({
+        //             type: 'POST',
+        //             url: '/utubegroupies/signup/processLogin/email/',
+        //             data: {
+        //                 csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value,
+        //                 'email' :   email,
+        //             },
+        //             dataType: 'json',
+        //             success: function(data) {
+        //                 if (!data.is_taken) {
+        //                     $('#emailL-error').html("<small class=text-danger>"+ data.error_message 
+        //                         +"</span>");
+        //                 } else {
+        //                     console.log("Email address in database");
+        //                     $('#emailL-error').html("");
+        //                 }
+        //             }
+        //         });
+        //     } else {
+        //         $('#emailL-error').html("");
+        //     }
+        // });
+    </script>
+</body>
+
+</html>

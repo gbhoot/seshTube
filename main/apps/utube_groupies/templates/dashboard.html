@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Utube Groupies</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" 
+        integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" 
+        crossorigin="anonymous">
+    <style>
+        .table > tbody > tr > td {
+            vertical-align: middle;
+        }
+        .table > tbody > tr > th {
+            vertical-align: middle;
+        }
+    </style>
+</head>
+
+<body class="bg-light">
+    <header class="mb-4">
+        <nav class="navbar text-light bg-dark py-3">
+            <div class="col">
+                <a href="/utubegroupies/dashboard" style="text-decoration:none" class="text-light">
+                    <h4>Groupies Dashboard</h4>
+                </a>
+            </div>
+            <div class="col-md-3 text-right">
+                <h6>Welcome, {{ user.first_name }}</h6>
+            </div>
+            <div class="col-md-2">
+                <a href="/utubegroupies/logout">
+                    <button type="button" class="btn btn-outline-danger">Logout</button>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="row mx-5 px-5">
+        <div class="col text-center">
+            <h4>Seshes Attending</h4>
+            {% if events %}
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Sesh Name</th>
+                            <th scope="col">Organizer</th>
+                            <th scope="col">Video</th>
+                        </tr>
+                    </thead>
+                    <tbody class="thead-dark">
+                        {% for event in events %}
+                            <tr>
+                                <th scope="row">{{ forloop.counter }}</th>
+                                <td><a href="sesh/{{event.id }}" style="text-decoration:none"><b>{{ event.name }}</b></a></td>
+                                <td>{{ event.organizer.first_name }} {{event.organizer.last_name }}</td>
+                                <td><img src="{{ event.video_img}}" alt="video-img" width="150px"></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        </div>
+        <div class="col-md-2 text-center">
+            <a href="createSesh">
+                <button class="btn btn-lg btn-info">Create a Sesh</button>
+            </a>
+        </div>
+        <div class="col text-center">
+            <h4>Invitations</h4>
+            {% if invitations %}
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Sesh Name</th>
+                            <th scope="col">Invited By</th>
+                            <th scope="col">Video</th>
+                            <th scope="col">Accept</th>
+                        </tr>
+                    </thead>
+                    <tbody class="thead-dark">
+                        {% for invite in invitations %}
+                            <tr>
+                                <th scope="row">{{ forloop.counter }}</th>
+                                <td>{{ invite.name }}</td>
+                                <td>{{ invite.organizer.first_name }} {{ invite.organizer.last_name }}</td>
+                                <td><img src="{{ invite.video_img}}" alt="video-img" width="150px"></td>
+                                <td><a href="acceptInvitation/{{ invite.id }}"><button class="btn btn-primary">Accept</button></a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" 
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" 
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" 
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" 
+        integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" 
+        crossorigin="anonymous"></script>
+    
+</body>
+
+</html>

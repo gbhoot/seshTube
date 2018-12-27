@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Utube Groupies</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" 
+        integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" 
+        crossorigin="anonymous">
+</head>
+
+<body class="bg-dark text-light">
+    <header class="mb-4">
+        <nav class="navbar text-dark bg-light py-3">
+            <div class="col">
+                <a href="/utubegroupies/dashboard" style="text-decoration:none" class="text-dark">
+                    <h4>Groupies Dashboard</h4>
+                </a>
+            </div>
+            <div class="col-md-3 text-right">
+                <h6>Welcome, {{ user.first_name }}</h6>
+            </div>
+                <div class="col-md-2">
+                <a href="/utubegroupies/logout">
+                    <button type="button" class="btn btn-outline-danger">Logout</button>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="mt-4">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col text-center">
+                <h2 class="mb-5">Create New Sesh</h2>
+                <form action="videoSearch/" method="POST" id="add-sesh" class="text-left">
+                    {% csrf_token %}
+                    <div class="form-group mb-5">
+                        <label for="name"><h5>Sesh Name:</h5></label>
+                        <input type="text" name="name" id="name" class="form-control" 
+                            placeholder="Sesh name" value="{{ sesh_name }}">
+                    </div>
+                    <div class="form-group mb-5">
+                        <label for="video_search"><h5>Search for Video:</h5></label>
+                        <input type="text" name="video_search" id="video_search" class="form-control" 
+                            placeholder="Youtube video" value="{{ video_search }}">
+                    </div>
+                    <div class="form-group text-right">
+                        <button type="submit" class="btn btn-outline-primary">Next</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </main>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" 
+        crossorigin="anonymous"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" 
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" 
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" 
+        integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" 
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

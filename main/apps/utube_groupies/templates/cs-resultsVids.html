@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Utube Groupies</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" 
+        integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" 
+        crossorigin="anonymous">
+    <style>
+        table tr {
+            height: 230px;
+        }
+        .table > tbody > tr > td {
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body class="bg-dark text-light pb-3">
+    <header class="mb-4">
+        <nav class="navbar text-dark bg-light py-4">
+            <div class="col">
+                <a href="/utubegroupies/dashboard" style="text-decoration:none" class="text-dark">
+                    <h4>Groupies Dashboard</h4>
+                </a>
+            </div>
+            <div class="col-md-3 text-right">
+                    <h6>Welcome, {{ user.first_name }}</h6>
+            </div>
+            <div class="col-md-2">
+                <a href="/utubegroupies/logout">
+                    <button type="button" class="btn btn-outline-danger">Logout</button>
+                </a>
+            </div>
+        </nav>
+    </header>
+        
+    <main class="mt-4">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col text-center">
+                <h2>Create New Sesh</h2>
+                <h5 class="mb-5 text-info">Choose the Video</h5>
+                
+                <table class="table">
+                    <tbody>
+                        {% for video in videos %}
+                            <tr class="py-3">
+                                <td><img src="{{ video.img }}" alt="video-img"></td>
+                                <td>
+                                    <h6>{{ video.title }}</h6>
+                                    <p class="text-info"><em>{{ video.length }}</em></p>
+                                </td>
+                                <td>
+                                    <a href="addVideo/{{ video.id }}">
+                                        <button class="btn btn-outline-info">Add</button>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col">
+                        <a href="/utubegroupies/dashboard/createSesh/">
+                            <button class="btn btn-outline-warning">Back</button>
+                        </a>
+                    </div>
+                    <div class="col-md-3"></div>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </main>
+    
+      
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" 
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" 
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" 
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" 
+        integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" 
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
